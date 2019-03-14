@@ -149,9 +149,7 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
 
 		// Registramos el botón en el formulario
 
-		if ( this.type === "submit" && !this.form && !this.noregister ) {
-			this.dispatchEvent(new CustomEvent('aw-form-submit-register', { detail: this, bubbles: true, composed: true }));
-		}
+		this._register_in_form();
 
 		// Si es tipo button form es null.
 
@@ -176,6 +174,19 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
 
 		if ( this.parentForm ) {
 			this.parentForm.unregister_button_submit();
+		}
+	}
+
+	/**
+	 * @method	_register_in_form
+	 * 
+	 * Registra el elemento en el formulario.
+	 */
+	_register_in_form( cont = 1 ) {
+		if ( this.type === "submit" && !this.form && !this.noregister ) {
+			setTimeout(() => {
+				this.dispatchEvent(new CustomEvent('aw-form-submit-register', { detail: this, bubbles: true, composed: true }));
+			}, 10);
 		}
 	}
 
