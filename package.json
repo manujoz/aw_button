@@ -1,15 +1,18 @@
 {
 	"name": "aw_button",
-	"version": "2.0.2",
-	"description": "Mixins de los formularios Arisman Webs",
+	"version": "2.0.3",
+	"description": "Botón Web Components Arisman Webs",
 	"keywords": [
-	  	"Arisman Webs"
+		"Polymer",
+		"Web Components",
+		"Forms Polymer",
+		"Forms web components"
 	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/manujoz/aw_button.git"
 	},
-	"author": "Botón Arisman Webs",
+	"author": "Manu Overa",
 	"dependencies": {
 		"aw_polymer_3": "^1.1.0",
 		"aw_extern_functions": "^2.0.0"
