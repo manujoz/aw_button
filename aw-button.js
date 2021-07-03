@@ -192,7 +192,7 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
 			type: { type: String },
 			/**
 			 * Variante del botón
-			 * @type {"outlined"}
+			 * @type {"outlined"|"filled"}
 			 */
 			variant: { type: String },
 		}

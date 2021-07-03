@@ -22,7 +22,3 @@ declare var AwButton: {
 	prototype: AwButton,
 	new(): AwButton
 }
-
-interface HTMLElementTagNameMap {
-	"aw-button": AwButton;
-}
