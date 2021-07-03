@@ -1,9 +1,39 @@
-import { PolymerElement, html } 		from "/node_modules/aw_polymer_3/polymer/polymer-element.js";
-import { AwExternsFunctionsMixin } 		from '/node_modules/aw_extern_functions/aw-extern-functions-mixin.js';
+import { PolymerElement, html } 		from "../aw_polymer_3/polymer/polymer-element.js";
+import { AwExternsFunctionsMixin } 		from '../aw_extern_functions/aw-extern-functions-mixin.js';
 
-import "/node_modules/aw_polymer_3/iron-icons/iron-icons.js";
-import "/node_modules/aw_polymer_3/paper-ripple/paper-ripple.js";
+import "../aw_polymer_3/iron-icons/iron-icons.js";
+import "../aw_polymer_3/paper-ripple/paper-ripple.js";
 
+/**
+ * Componente de botón
+ * 
+ * **Attrs**: [type], [disabled], [form], [toggles], [noink], [loading], [noregister]
+ * 
+ * @slot
+ * @attr {String} clickfunc - Función que es llamada al hacer click
+ * @cssprop --aw-button-iron-icon-size
+ * @cssprop --aw-button-iron-icon-top
+ * @cssprop --aw-button-iron-icon-margin
+ * @cssprop --aw-button-iron-icon-fill
+ * @cssprop --aw-button-padding
+ * @cssprop --aw-button-font-family
+ * @cssprop --aw-button-color
+ * @cssprop --aw-button-color-hv
+ * @cssprop --aw-button-font-weight
+ * @cssprop --aw-button-bg-color
+ * @cssprop --aw-button-bg-color-hv
+ * @cssprop --aw-button-border-color
+ * @cssprop --aw-button-border-color-hv
+ * @cssprop --aw-button-border-radius
+ * @cssprop --aw-button-disabled-color
+ * @cssprop --aw-button-disabled-bg-color
+ * @cssprop --aw-button-disabled-border-color
+ * @cssprop --aw-button-loadbar-position
+ * @cssprop --aw-button-loadbar-left
+ * @cssprop --aw-button-loadbar-bottom
+ * @cssprop --aw-button-loadbar-height
+ * @cssprop --aw-button-loadbar-color
+ */
 class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
 	static get template() {
 		return html`
@@ -16,7 +46,9 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
             :host([unresolved]) {
                 display: none;
             }
-
+			:host([fullwidth]) {
+				width: 100%;
+			}
             ::slotted(iron-icon) {
                 width: var(--aw-button-iron-icon-size,20px);
                 height: var(--aw-button-iron-icon-size 20px);
@@ -24,26 +56,21 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
                 margin: var(--aw-button-iron-icon-margin,0px 7px 0px 0px);
 				fill: var(--aw-button-iron-icon-fill,var(--aw-button-color,#FFFFFF));
             }
-
             button {
-                position: relative;
-				width: 100%;
-                padding: var(--aw-button-padding,10px 15px);
+                background-color: var(--aw-button-bg-color,#1C7CDD);
+                border-radius: var(--aw-button-border-radius, 2px);
+                border: solid 1px var(--aw-button-border-color,var(--aw-button-bg-color,#1C7CDD));
+                box-sizing: border-box;
+                color: var(--aw-button-color,white);
+                cursor: pointer;
                 font-family: var(--aw-button-font-family,"arial");
                 font-size: var(--aw-button-font-size,14px);
                 font-weight:  var(--aw-button-font-weight,normal);
-                background-color: var(--aw-button-bg-color,#1C7CDD);
-                border: solid 1px var(--aw-button-border-color,var(--aw-button-bg-color,#1C7CDD));
-                border-radius: var(--aw-button-border-radius, 2px);
-                color: var(--aw-button-color,white);
-                cursor: pointer;
+                padding: var(--aw-button-padding,10px 15px);
+                position: relative;
                 transition: color .2s, background .2s, border .2s;
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                -ms-box-sizing: border-box;
-                box-sizing: border-box;
+				width: 100%;
             }
-
             button:hover {
                 color: var(--aw-button-color-hv,#FFFFFF);
                 background-color: var(--aw-button-bg-color-hv,#4d9ceb);
@@ -55,15 +82,30 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
             button.toggle {
                 box-shadow: inset 0px 0px 30px #333333;
             }
+			button[variant="outlined"] {
+				background-color: transparent;
+				color: var(--aw-button-bg-color,#1C7CDD);
+			}
+			button[variant="outlined"]:hover {
+				background-color: var(--aw-button-bg-color,#1C7CDD);
+				color: var(--aw-button-color,white);
+			}
+			button[size="small"] {
+				font-size: 12px;
+				padding: 5px 15px;
+			}
+			button[size="big"] {
+				font-size: 16px;
+				padding: 12px 15px;
+			}
             button[disabled] {
                 color: var(--aw-button-disabled-color,#999999);
                 background-color: var(--aw-button-disabled-bg-color,#EAEAEA);
                 border-color: var(--aw-button-disabled-border-color,var(--aw-button-disabled-bg-color,#EAEAEA));
             }
-
             #load_bar {
                 position: var(--aw-button-loadbar-position,absolute);
-                left: var(--aw-button-loadbar-left,0);;
+                left: var(--aw-button-loadbar-left,0);
                 bottom: var(--aw-button-loadbar-bottom,0);
                 height: var(--aw-button-loadbar-height,3px);
                 background-color: var(--aw-button-loadbar-color,#1C7CDD);
@@ -71,13 +113,11 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
                 border-bottom-right-radius: 2px;
                 display: none;
             }
-
             #load_bar[loading] {
                 display: block;
                 -webkit-animation: loading 2s infinite;
                 animation: loading 2s infinite;
             }
-
             @keyframes loading {
                 0% {
                     left: 0%;
@@ -97,6 +137,8 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
           	id="button"
             type$="[[type]]"
             disabled$=[[disabled]]
+            variant$=[[variant]]
+            size$=[[size]]
             on-click="_click"
             >
             <slot></slot>
@@ -110,29 +152,71 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
 
 	static get properties() {
 		return {
-			button: { type: Object },
-
-			// Propiedades del botón
-
-			type: { type: String, value: "button" },
-			disabled: { type: Boolean, value: false },
+			/**
+			 * Desactiva el botón
+			 */
+			disabled: { type: Boolean },
+			/**
+			 * Id del formulario al que pertenece el botón
+			 */
 			form: { type: String },
-			toggles: { type: Boolean, value: false },
-			noink: { type: Boolean, value: false },
-
-			// Variable que indica el estado del botón en el toggle
-
-			toggle: { type: Boolean, value: false },
-
-			// Método que pone el botón a cargar
-
-			loading: { type: Boolean, value: false, observer: "_changue_loading" },
-
-			// Relación con el formulario
-
-			parentForm: Object,
-			noregister: { type: Boolean, value: false }
+			/**
+			 * Pone el botón en ancho completo
+			 */
+			fullwidth: { type: Boolean, reflectToAttribute: true },
+			/**
+			 * Pone el botón en estado de carga
+			 */
+			loading: { type: Boolean, observer: "_changue_loading" },
+			/**
+			 * Quita el efecto ripple al hacer click sobre el botón
+			 */
+			noink: { type: Boolean },
+			/**
+			 * Evita que el botón se registre en el formulario
+			 */
+			noregister: { type: Boolean },
+			/**
+			 * Tamaño del botón
+			 * @type {"big"|"small"}
+			 */
+			size: { type: String },
+			/**
+			 * Indica si el botón debe cambiar a pulsado y viceversa cuando se hace click sobre el
+			 */
+			toggleable: { type: Boolean },
+			/** 
+			 * Tipo del botón
+			 * @type {"submit"|"button"} 
+			 */
+			type: { type: String },
+			/**
+			 * Variante del botón
+			 * @type {"outlined"}
+			 */
+			variant: { type: String },
 		}
+	}
+
+	constructor() {
+		super();
+
+		this.disabled = false;
+		this.form = null;
+		this.fullwidth = false;
+		this.loading = false;
+		this.noink = false;
+		this.noregister = false;
+		this.size = undefined;
+		this.toggleable = false;
+		this.type = "button";
+		this.variant = "filled";
+
+		/** @type {HTMLButtonElement} */
+		this.button = undefined;
+		/** @type {AwForm} */
+		this.parentForm = undefined;
+		this.toggle = false;
 	}
 
 	/**
@@ -178,6 +262,13 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
 	}
 
 	/**
+	 * @method	click
+	 */
+	click() {
+		this.button.click();
+	}
+
+	/**
 	 * @method	_register_in_form
 	 * 
 	 * Registra el elemento en el formulario.
@@ -197,7 +288,7 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
 	 * a éste un efecto de estar pulsado o no alternativamente.
 	 */
 	_changue_toggle() {
-		if( !this.toggles ) {
+		if( !this.toggleable ) {
 			return false;
 		}
 
