@@ -22,6 +22,8 @@ import "../aw_polymer_3/paper-ripple/paper-ripple.js";
  * @cssprop --aw-button-font-weight
  * @cssprop --aw-button-bg-color
  * @cssprop --aw-button-bg-color-hv
+ * @cssprop --aw-button-bg-image
+ * @cssprop --aw-button-bg-image-hv
  * @cssprop --aw-button-border-color
  * @cssprop --aw-button-border-color-hv
  * @cssprop --aw-button-border-radius
@@ -58,6 +60,7 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
             }
             button {
                 background-color: var(--aw-button-bg-color,#1C7CDD);
+				background-image: var(--aw-button-bg-image, none);
                 border-radius: var(--aw-button-border-radius, 2px);
                 border: solid 1px var(--aw-button-border-color,var(--aw-button-bg-color,#1C7CDD));
                 box-sizing: border-box;
@@ -74,6 +77,7 @@ class AwButton extends AwExternsFunctionsMixin ( PolymerElement ) {
             button:hover {
                 color: var(--aw-button-color-hv,#FFFFFF);
                 background-color: var(--aw-button-bg-color-hv,#4d9ceb);
+				background-image: var(--aw-button-bg-image-hv, none);
                 border-color: var(--aw-button-border-color-hv,var(--aw-button-bg-color-hv,#4d9ceb));
             }
             button:focus {
